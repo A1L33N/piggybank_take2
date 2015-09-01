@@ -6,4 +6,7 @@ class Transaction < ActiveRecord::Base
   validates(:transaction_type, {:presence => true})
   validates(:description, {:presence => true})
   validates(:date, {:presence => true})
+
+
+
 end

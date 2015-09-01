@@ -15,7 +15,7 @@ describe(Transaction) do
       date = Date.new(2015, 12, 29)
       transaction1 = Transaction.create({:amount => 50.00, :transaction_type => 'deposit', :description => 'birthday gift', :date => date, :kid_id => kid1.id})
       transaction2 = Transaction.create({:amount => 5.00, :transaction_type => 'deposit', :description => 'allowance', :date => date, :kid_id => kid1.id})
-      expect(kid1.transactions.sum(:amount).to_i).to eq(55.00)
+      expect(kid1.transactions.sum(:amount).to_f).to eq(55.00)
     end
   end
 end
