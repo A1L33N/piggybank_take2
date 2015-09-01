@@ -1,0 +1,18 @@
+<h1>Banks/Parents</h1>
+
+<% if @parents.any?() %>
+  <ul>
+    <% @parents.each() do |parent| %>
+      <li><a href="/parents/<%=parent.id%>"><%= parent.bank_name %></a></li>
+    <% end %>
+  </ul>
+<% else %>
+<% end %>
+
+
+<h3>Add a parent/bank</h3>
+<form id="form_id" action="/parents" method="post">
+  <input type="text" name="parent_name" placeholder="Enter your name">
+  <input type="text" name="bank_name" placeholder="Name your bank">
+  <button type="submit">Add Parent/Bank</button>
+</form>

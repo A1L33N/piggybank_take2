@@ -1,0 +1,21 @@
+<h1><%=@parent.name%>'s Kids:</h1>
+
+<% if @kids.any?() %>
+<ul>
+  <% @kids.each() do |kid| %>
+  <li><a href="/kids/<%=kid.id%>"><%= kid.name %></a></li>
+  <% end %>
+</ul>
+<% else %>
+<% end %>
+
+<h3>Add a kid to your bank</h3>
+<form action="/parents/<%= @parent.id %>" method="post">
+
+  <input type="text" name="name" placeholder="Enter a kid name">
+  <input type="text" name="account_name" placeholder="Nickname the account">
+  <input type="text" name="beginning_balance" placeholder="Enter beginning balance" >
+  <input type="text" name="goal" placeholder="Enter a savings goal">
+
+  <button type="submit">Add</button>
+</form>
