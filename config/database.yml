@@ -1,0 +1,8 @@
+development:
+  adapter: postgresql
+  database: piggybank_development
+
+
+test:
+  adapter: postgresql
+  database: piggybank_test

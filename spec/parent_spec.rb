@@ -1,10 +1,13 @@
-ENV['RACK_ENV'] = 'test'
+require('spec_helper')
 
-require("bundler/setup")
-Bundler.require(:default, :test)
-set(:root, Dir.pwd())
+describe(Parent) do
+  describe('#kids') do
+    it { should have_many(:kids) }
+  end
 
-require('capybara/rspec')
-Capybara.app = Sinatra::Application
-set(:show_exceptions, false)
-require('./app')
+  it { should validate_presence_of(:name) }
+  it { should validate_presence_of(:bank_name) }
+  it { should validate_length_of(:name) }
+  it { should validate_length_of(:bank_name) }
+
+end
