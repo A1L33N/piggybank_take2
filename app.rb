@@ -45,5 +45,19 @@ end
 
 ######Kids
 get('/kids/:id') do
+  id = params.fetch('id').to_i
+  @kid = Kid.find(id)
+  @transactions = @kid.transactions
   erb(:kid)
+end
+
+post('/kids/:id') do
+  id = params.fetch('id').to_i
+  kid = Kid.find(id)
+  transaction_type = params.fetch('transaction_type')
+  amount = params.fetch('amount').to_f
+  description = params.fetch('description')
+  date = params.fetch('date')
+  transaction = Transaction.create(:transaction_type => transaction_type, :kid_id => kid.id, :amount => amount, :date => date, :description => description)
+  redirect back
 end
