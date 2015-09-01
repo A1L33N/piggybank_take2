@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Piggybank</title>
+    <!-- <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'> -->
+<style media="screen">
+  body {
+    line-height: 0px;
+    font-family: helvetica;
+
+  }
+
+   #wrapper {
+     position: absolute;
+     top:0px;
+     right:0px;
+     left:0px;
+     bottom: 0px;
+     margin:0 auto;
+     background-color: lightblue;
+   }
+
+   nav {
+     float: right;
+     background-color: lightblue;
+   }
+
+   button{
+     background-color: darkblue;
+     color: white;
+   }
+
+    a{
+      color: white;
+    }
+
+</style>
+
+
+  </head>
+  <body>
+
+    <div id="wrapper">
+      <nav id="nav">
+        <button name="button"><a href="/">Home</a></button>
+        <button name="button"><a href="/parents">Parents</a></button>
+      </nav>
+      <%= yield %>
+    </div>
+  </body>
+</html>
