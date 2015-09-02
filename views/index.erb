@@ -1,4 +1,49 @@
-<h1>My Piggybank</h1>
 
-<a href="/kids">Kids</a>
-<a href="/parents">Parents</a>
+<style media="screen">
+
+#footer {
+  background-color: lightblue;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 15%;
+  text-align: center;
+  line-height: 100px;
+}
+
+#content {
+  background-color: pink;
+  position: absolute;
+  height: 900px;
+  line-height: 100x;
+  margin: 0 auto;
+  text-align: center;
+}
+
+#content p {
+  font-size: 48px;
+  font-weight: bold;
+}
+
+img{
+  width: 40%;
+  height: 40%;
+
+
+}
+
+
+</style>
+
+<div id="content">
+    <p>My Piggybank</p>
+    <img src="/img/piggy5.png" alt="Piggybank"  />
+</div>
+<div id="footer">
+      <form id="login_form" action="/kid" method="get">
+        <label for="kid_name">Enter Your Name</label>
+        <input type="text" name="kid_name" >
+        <button type="submit" name="button">Go!</button>
+      </form>
+
+</div>

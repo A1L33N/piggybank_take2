@@ -5,6 +5,7 @@ require('pry')
 Dir[File.dirname(__FILE__) + '/lib/*.rb'].each { |file| require file }
 
 
+
 get ("/") do
   erb(:index)
 end
@@ -61,4 +62,5 @@ post('/kids/:id') do
   date = params.fetch('date')
   transaction = Transaction.create(:transaction_type => transaction_type, :kid_id => kid.id, :amount => amount, :date => date, :description => description)
   redirect back
+
 end
