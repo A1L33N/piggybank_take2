@@ -72,13 +72,7 @@ get('/kid') do
   erb(:kid_info)
 end
 
-get('/kid_chores/:id') do
-  id = params.fetch('id').to_i
-  @kid = Kid.find(id)
-  @parent = @kid.parent
-  @chores = @parent.chores
-  erb(:kid_chores)
-end
+
 
 ##### Chores
 
@@ -99,13 +93,25 @@ post('/parent/:id/chores') do
 
 end
 
-patch('/parent/:id/chores') do
+get('/kid_chores/:id') do
+  id = params.fetch('id').to_i
+  @kid = Kid.find(id)
+  @parent = @kid.parent
+  @chores = @parent.chores
+  erb(:kid_chores)
+end
+
+patch('/parent/:id/assign_chores') do
   chore_id = params.fetch('chore_id').to_i
   chore = Chore.find(chore_id)
   kid_id = params.fetch('kid_id').to_i
   chore.update({:kid_id => kid_id, :available => false})
+  redirect back
+end
 
-
-
+patch('/parent/:id/complete_chore') do
+  chore_id = params.fetch('chore_id').to_i
+  chore = Chore.find(chore_id)
+  chore.update({:complete => true})
   redirect back
 end

@@ -4,10 +4,10 @@
   <ul>
     <% @chores.each() do |chore| %>
       <% if chore.kid_id.==(nil) %>
-        <li><%=chore.description%>&nbsp;&nbsp;&nbsp;&nbsp;<%=chore.pay%>&nbsp;&nbsp;&nbsp;&nbsp; Chore Available </li>
+        <li><%=chore.description%>&nbsp;&nbsp;&nbsp;&nbsp;<%=chore.pay%>&nbsp;&nbsp;&nbsp;&nbsp; Chore Available &nbsp;&nbsp;&nbsp;&nbsp; Completed: <%=chore.complete%>  </li>
       <% else %>
         <% kid = Kid.find(chore.kid_id) %>
-        <li><%=chore.description%>&nbsp;&nbsp;&nbsp;&nbsp;<%=chore.pay%>&nbsp;&nbsp;&nbsp;&nbsp; <%= kid.name %> has this chore </li>
+        <li><%=chore.description%>&nbsp;&nbsp;&nbsp;&nbsp;<%=chore.pay%>&nbsp;&nbsp;&nbsp;&nbsp; <%= kid.name %> has this chore &nbsp;&nbsp;&nbsp;&nbsp;Completed: <%=chore.complete%></li>
       <% end %>
     <% end %>
 
