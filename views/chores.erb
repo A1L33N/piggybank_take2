@@ -1,0 +1,22 @@
+<h1>Here are chores for <%=@parent.bank_name %></h1>
+
+<% if @chores.any?() %>
+  <ul>
+    <% @chores.each() do |chore| %>
+        <li><%=chore.description%>&nbsp;&nbsp;&nbsp;&nbsp;<%=chore.pay%>&nbsp;&nbsp;&nbsp;&nbsp; Chore Available </li>
+    <% end %>
+  </ul>
+<%else%>
+
+<p> No chores on this list</p>
+<%end%>
+
+
+Add Chores
+<form id="form_id" action="/parent/<%=@parent.id %>/chores" method="post">
+  <input type="text" name="description" placeholder="Enter chore description">
+  <label for="pay">Enter the pay for this chore $:</label>
+    <input type="text" name="pay">
+  <button type="submit">Add chore</button>
+
+</form>

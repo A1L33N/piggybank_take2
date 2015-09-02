@@ -64,3 +64,24 @@ post('/kids/:id') do
   redirect back
 
 end
+
+
+##### Chores
+get('/parent/:id/chores') do
+  id = params.fetch('id').to_i
+  @parent = Parent.find(id)
+  @chores = @parent.chores
+
+
+  erb(:chores)
+end
+
+post('/parent/:id/chores') do
+  id = params.fetch('id').to_i
+  @parent = Parent.find(id)
+  description = params.fetch('description')
+  pay = params.fetch('pay').to_f
+  chore = Chore.create({:description => description, :pay => pay, :kid_id => nil, :parent_id => id, :available => true, :complete => false})
+  redirect back
+
+end
