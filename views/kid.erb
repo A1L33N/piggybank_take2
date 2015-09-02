@@ -1,7 +1,18 @@
 <h1><%=@kid.name%>'s Bank info</h1>
 
 
-<%=@kid.name%> has saved $<%= @transactions.sum(:amount).to_f %>
+<p><%=@kid.name%> has saved $<%= @transactions.sum(:amount).to_f %></p>
+<p><%=@kid.name%>'s savings goal $: <%=@kid.goal%></p>
+
+<h3>Transaction History</h3>
+
+<ul>
+  <% @transactions.each() do |transaction| %>
+  <li><%= transaction.date %>&nbsp;&nbsp;&nbsp;&nbsp;<%= transaction.transaction_type %>&nbsp;&nbsp;&nbsp;&nbsp;<%= transaction.amount %>&nbsp;&nbsp;&nbsp;&nbsp;<%= transaction.description %></li>
+  <% end %>
+</ul>
+
+
 
 <h3>Add a transaction</h3>
 <form id="form_id" action="/kids/<%=@kid.id%>" method="post">
