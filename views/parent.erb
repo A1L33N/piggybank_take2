@@ -1,21 +1,47 @@
-<h1><%=@parent.name%>'s Kids:</h1>
+<div class="page_frame">
 
-<% if @kids.any?() %>
-<ul>
-  <% @kids.each() do |kid| %>
-  <li><a href="/kids/<%=kid.id%>"><%= kid.name %></a></li>
-  <% end %>
-</ul>
-<% else %>
-<% end %>
+  <div class="list_frame">
 
-<h3>Add a kid to your bank</h3>
-<form action="/parents/<%= @parent.id %>" method="post">
 
-  <input type="text" name="name" placeholder="Enter a kid name">
-  <input type="text" name="account_name" placeholder="Nickname the account">
-  <input type="text" name="beginning_balance" placeholder="Enter beginning balance" >
-  <input type="text" name="goal" placeholder="Enter a savings goal">
+    <% if @kids.any?() %>
+    <table class="table">
+      <thead>
+      <tr>
+        <th><br>Kid</th>
+        <th><br>Account</th>
+        <th>Beginning<br>Balance</th>
+        <th>Current<br>Balance</th>
+        <th><br>Goal</td>
+      </tr>
+    </thead>
+    <tbody>
+      <% @kids.each() do |kid| %>
+      <tr>
+        <td><a href="/parent/kids/<%=kid.id%>" style="background:lightgray;"><%= kid.name %></a></td>
+        <td style="width:125px;"><%= kid.account_name %></td>
+        <td class="money"><%= '%.2f' % kid.beginning_balance %></td>
+        <td class="money"><%= '%.2f' % kid.balance %></td>
+        <td class="money"><%= '%.2f' % kid.goal %></td>
+       </tr>
+      <% end %>
+    </tbody>
+    </table>
+    <% else %>
+    <% end %>
+  </div>
 
-  <button type="submit">Add</button>
-</form>
+  <div class="form_div">
+
+
+  <h3>Add a kid to your bank</h3>
+  <form action="/parents/<%= @parent.id %>" method="post">
+
+    <input type="text" name="name" placeholder="Enter a kid name">
+    <input type="text" name="account_name" placeholder="Nickname the account">
+    <input type="text" name="beginning_balance" placeholder="Enter beginning balance" >
+    <input type="text" name="goal" placeholder="Enter a savings goal">
+
+    <button type="submit">Add</button>
+  </form>
+  </div>
+</div>
