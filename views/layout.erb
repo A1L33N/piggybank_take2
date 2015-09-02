@@ -5,34 +5,37 @@
     <!-- <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'> -->
 <style media="screen">
   body {
-    line-height: 0px;
+    margin: 0;
+    padding: 0;
     font-family: helvetica;
-
+    height: 100%;
   }
 
-   #wrapper {
-     position: absolute;
-     top:0px;
-     right:0px;
-     left:0px;
-     bottom: 0px;
-     margin:0 auto;
-     background-color: lightblue;
-   }
+#wrapper {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+}
 
-   nav {
-     float: right;
-     background-color: lightblue;
-   }
 
-   button{
-     background-color: darkblue;
-     color: white;
-   }
+  #nav_wrapper {
+    width: 100%;
+    top: 0;
+    left: 0;
+    height: 30px;
+    background-color: lightblue;
+  }
 
-    a{
-      color: white;
-    }
+  #nav {
+    float: right;
+    margin-right: 5px;
+    margin-top: 5px;
+  }
+
+  button, a {
+    background: darkblue;
+    color: white;
+  }
 
 </style>
 
@@ -41,11 +44,13 @@
   <body>
 
     <div id="wrapper">
-      <nav id="nav">
-        <button name="button"><a href="/">Home</a></button>
-        <button name="button"><a href="/parents">Parents</a></button>
-      </nav>
-      <%= yield %>
+      <div id="nav_wrapper">
+          <nav id="nav">
+            <button name="button"><a href="/">Home</a></button>
+            <button name="button"><a href="/parents">Parents</a></button>
+          </nav>
+      </div>
+     <%= yield %>
     </div>
   </body>
 </html>

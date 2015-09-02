@@ -1,84 +1,48 @@
 <style media="screen">
 
-  #page1 {
-    background-color: pink;
-    position: absolute;
-    top:30px;
-    right:0px;
-    left:0px;
-    bottom: 0px;
-  }
-
-  #header {
-      text-align: center;
-      display: inline-block;
-      vertical-align: middle;
-      height: 150px;
-      width: 100%;
-      }
-
-  #hometext {
-    display: inline-block;
-    font-size: 80px;
-    font-weight: bold;
-    color: darkblue;
-
-  }
-
-  #content {
-    width: 50%;
-    margin: 5% auto;
-    }
-
-  img {
-      max-width: 100%;
-      height: auto;
-      width: auto\9; /* ie8 */
-  }
-
-  #footer{
-      background-color: lightblue;
-      position: absolute;
-      width: 100%;
-      height: 100px;
-      bottom: 0px;
-      vertical-align: middle;
-      line-height: 100px;
-
-  }
-
-  input[type="text"] {
-      width: 200px;
-      height: 30px;
-      font-size: 30px;
-      padding: 10px;
-  }
-
-#login_form {
+#footer {
+  background-color: lightblue;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 15%;
   text-align: center;
-  font-size: 30px;
+  line-height: 100px;
 }
+
+#content {
+  background-color: pink;
+  position: absolute;
+  height: 900px;
+  line-height: 100x;
+  margin: 0 auto;
+  text-align: center;
+}
+
+#content p {
+  font-size: 48px;
+  font-weight: bold;
+}
+
+img{
+  width: 40%;
+  height: 40%;
+
+
+}
+
 
 </style>
 
-<div id="page1">
-  <div id="header">
-  <span id="hometext">
-      <p>My Piggybank</p>
-  </span>
-  </div>
+<div id="content">
+    <p>My Piggybank</p>
+    <img src="/img/piggy5.png" alt="Piggybank"  />
+</div>
+<div id="footer">
+      <form id="login_form" action="/kid" method="get">
+        <label for="kid_name">Enter Your Name</label>
+        <input type="text" name="kid_name" >
+        <button type="submit" name="button">Go!</button>
+      </form>
 
-  <div id="content">
-    <img src="/img/piggy5.png" alt="Piggybank"  width="600" height="450" />
-  </div>
-
-  <div id="footer">
-    <span id="login_form">
-    <form class="" action="index.html" method="get">
-      <label for="kid_name">Enter Your Name</label>
-      <input type="text" name="kid_name" >
-      <button type="submit" name="button">Go!</button>
-    </form>
-  </span>
-  </div>
 </div>
