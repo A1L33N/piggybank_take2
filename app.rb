@@ -65,6 +65,14 @@ post('/kids/:id') do
 
 end
 
+get('/kid') do
+  name = params.fetch('kid_name')
+  @kid = Kid.find_by name: name
+  @transactions = @kid.transactions
+  erb(:kid_info)
+
+end
+
 
 ##### Chores
 get('/parent/:id/chores') do
