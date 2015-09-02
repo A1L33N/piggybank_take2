@@ -1,0 +1,45 @@
+<h1>Here are <%= @parent.bank_name %> available chores</h1>
+
+<% if @chores.any? %>
+
+  <% @chores.each() do |chore| %>
+    <% if chore.available() %>
+    <li><%=chore.description%>&nbsp;&nbsp;&nbsp;&nbsp;<%=chore.pay%></li>
+
+    <form  action='/parent/<%=@parent.id%>/assign_chores' method="post">
+      <input type="hidden" name="_method" value="patch">
+      <input type="hidden" name="kid_id" value="<%=@kid.id%>">
+      <input type="hidden" name="chore_id" value="<%=chore.id%>">
+      <button type="submit">Sign up for this chore</button>
+
+    </form></li>
+
+
+
+    <% end %>
+  <%end%>
+<% else %>
+  <h3>No available chores</h3>
+<% end %>
+
+
+<h2>Here are the chores you have signed up for, <%=@kid.name %>:</h2>
+
+<% if @kid.chores.any?() %>
+  <ul>
+    <% @kid.chores.each() do |chore| %>
+      <% if chore.complete.==(false) %>
+      <li><%=chore.description%>&nbsp;&nbsp;&nbsp;&nbsp;<%=chore.pay%>
+        <form action="/parent/<%=@parent.id%>/complete_chore" method="post">
+          <input type="hidden" name="_method" value="patch">
+          <input type="hidden" name="chore_id" value="<%=chore.id%>">
+          <button type="submit">Chore completed</button>
+        </form></li>
+      <% else %>
+        <li><%=chore.description%>&nbsp;&nbsp;&nbsp;&nbsp; THIS IS DONE, AWAITING PAYMENT</li>
+      <% end %>
+    <% end %>
+  </ul>
+<% else %>
+  <h4>You haven't signed up for anything you lazy kid!</h4>
+<%end %>
