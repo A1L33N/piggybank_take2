@@ -1,5 +1,5 @@
 class ChangeColumnNameInTransactions < ActiveRecord::Migration
   def change
-    rename_column :transactions, :category, :transaction_type
+    rename_column :transactions, :type, :transaction_type
   end
 end
