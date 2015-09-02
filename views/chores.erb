@@ -7,7 +7,19 @@
         <li><%=chore.description%>&nbsp;&nbsp;&nbsp;&nbsp;<%=chore.pay%>&nbsp;&nbsp;&nbsp;&nbsp; Chore Available &nbsp;&nbsp;&nbsp;&nbsp; Completed: <%=chore.complete%>  </li>
       <% else %>
         <% kid = Kid.find(chore.kid_id) %>
-        <li><%=chore.description%>&nbsp;&nbsp;&nbsp;&nbsp;<%=chore.pay%>&nbsp;&nbsp;&nbsp;&nbsp; <%= kid.name %> has this chore &nbsp;&nbsp;&nbsp;&nbsp;Completed: <%=chore.complete%></li>
+          <% if chore.complete.==(true) %>
+            <li><%=chore.description%>&nbsp;&nbsp;&nbsp;&nbsp;<%=chore.pay%>&nbsp;&nbsp;&nbsp;&nbsp; <%= kid.name %> has this chore &nbsp;&nbsp;&nbsp;&nbsp;Completed: <%=chore.complete%>
+              <form id="form_id" action="/parent/<%=@parent.id %>/pay_kid" method="post">
+                <input type="hidden" name="_method" value="patch">
+                <input type="hidden" name="amount" value="<%=chore.pay %>">
+                <input type="hidden" name="kid_id" value="<%=kid.id %>">
+                <input type="hidden" name="chore_id" value="<%=chore.id %>">
+                <button type='submit'>Pay <%=kid.name %></button>
+              </form>
+            </li>
+          <% else %>
+            <li><%=chore.description%>&nbsp;&nbsp;&nbsp;&nbsp;<%=chore.pay%>&nbsp;&nbsp;&nbsp;&nbsp; <%= kid.name %> has this chore &nbsp;&nbsp;&nbsp;&nbsp;Completed: <%=chore.complete%></li>
+          <% end %>
       <% end %>
     <% end %>
 

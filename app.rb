@@ -115,3 +115,15 @@ patch('/parent/:id/complete_chore') do
   chore.update({:complete => true})
   redirect back
 end
+
+patch('/parent/:id/pay_kid') do
+  amount = params.fetch('amount').to_f
+  kid_id = params.fetch('kid_id')
+  chore_id = params.fetch('chore_id').to_i
+  chore = Chore.find(chore_id)
+  description = chore.description
+  new_transaction = Transaction.create({:amount => amount, :transaction_type => 'deposit', :description => description, :date => Date.today, :kid_id => kid_id })
+  chore.destroy
+  redirect back
+
+end
