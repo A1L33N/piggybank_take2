@@ -1,0 +1,21 @@
+<h1><%=@kid.name%>'s Bank info</h1>
+
+
+<%=@kid.name%> has saved $<%= @transactions.sum(:amount).to_f %>
+
+<h3>Add a transaction</h3>
+<form id="form_id" action="/kids/<%=@kid.id%>" method="post">
+  <p><select id="transaction_type" type="text" name="transaction_type">
+    <option value="deposit">Deposit</option>
+    <option value="withdrawal">Withdrawal</option>
+    </select> Select transaction type </p>
+  <label for="amount">Enter transaction amount: $</label>
+  <input type="text" name="amount">
+  <p><label for="description">Enter description:</label>
+    <input type="text" name="description"></p>
+  <p>
+    <label for="date">Today's date:</label>
+    <input type="date" name="date"></p>
+
+  <button type="submit">Add transaction</button>
+</form>
