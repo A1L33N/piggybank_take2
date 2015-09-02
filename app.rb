@@ -81,12 +81,11 @@ get('/kid_chores/:id') do
 end
 
 ##### Chores
+
 get('/parent/:id/chores') do
   id = params.fetch('id').to_i
   @parent = Parent.find(id)
   @chores = @parent.chores
-
-
   erb(:chores)
 end
 
@@ -98,4 +97,15 @@ post('/parent/:id/chores') do
   chore = Chore.create({:description => description, :pay => pay, :kid_id => nil, :parent_id => id, :available => true, :complete => false})
   redirect back
 
+end
+
+patch('/parent/:id/chores') do
+  chore_id = params.fetch('chore_id').to_i
+  chore = Chore.find(chore_id)
+  kid_id = params.fetch('kid_id').to_i
+  chore.update({:kid_id => kid_id, :available => false})
+
+
+
+  redirect back
 end
