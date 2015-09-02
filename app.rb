@@ -40,6 +40,7 @@ post('/parents/:id') do
   beginning_balance = params.fetch('beginning_balance').to_f
   goal = params.fetch('goal').to_f
   kid = Kid.create({:name => name, :account_name => account_name, :beginning_balance => beginning_balance, :goal => goal, :parent_id => id})
+  transaction = Transaction.create(:transaction_type => "deposit", :kid_id => kid.id, :amount => beginning_balance, :date => Date.today, :description => "first deposit")
   redirect back
 end
 
