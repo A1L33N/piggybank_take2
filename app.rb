@@ -70,9 +70,15 @@ get('/kid') do
   @kid = Kid.find_by name: name
   @transactions = @kid.transactions
   erb(:kid_info)
-
 end
 
+get('/kid_chores/:id') do
+  id = params.fetch('id').to_i
+  @kid = Kid.find(id)
+  @parent = @kid.parent
+  @chores = @parent.chores
+  erb(:kid_chores)
+end
 
 ##### Chores
 get('/parent/:id/chores') do

@@ -1,0 +1,5 @@
+<h1>Here are <%= @parent.bank_name %> chores</h1>
+
+<% @chores.each() do |chore| %>
+  <li><%=chore.description%></li>
+<%end%>
