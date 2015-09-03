@@ -165,7 +165,7 @@ post('/kid/:id/request') do
   request_type = params.fetch('request_type')
   amount = params.fetch('amount').to_f
   description = params.fetch('description')
-  request = Request.create({:request_type => request_type, :amount => amount, :description => description, :kid_id => kid_id, :parent_id => parent_id, :complete => false})
+  request = Request.create({:request_type => request_type, :amount => amount, :description => description, :kid_id => kid_id, :parent_id => parent_id})
   redirect back
 end
 
