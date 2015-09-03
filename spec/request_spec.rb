@@ -9,4 +9,7 @@ describe(Request) do
     it { should belong_to(:kid) }
   end
 
+  it { should validate_presence_of(:amount) }
+  it { should validate_presence_of(:description) }
+
 end
