@@ -158,6 +158,7 @@ end
 
 ######Requests
 
+##kid request form
 post('/kid/:id/request') do
   kid_id = params.fetch('kid_id').to_i
   parent_id = params.fetch('parent_id').to_i
@@ -165,5 +166,20 @@ post('/kid/:id/request') do
   amount = params.fetch('amount').to_f
   description = params.fetch('description')
   request = Request.create({:request_type => request_type, :amount => amount, :description => description, :kid_id => kid_id, :parent_id => parent_id, :complete => false})
+  redirect back
+end
+
+
+
+post('/parent/:id/request') do
+  kid_id = params.fetch('kid_id').to_i
+  transaction_type = params.fetch('transaction_type')
+  description = params.fetch('description')
+  amount = params.fetch('amount').to_f
+  date = Date.today
+  new_transaction = Transaction.create({:amount => amount, :transaction_type => transaction_type, :description => description, :date => date, :kid_id => kid_id })
+  request_id = params.fetch('request_id').to_i
+  request = Request.find(request_id)
+  request.destroy
   redirect back
 end
