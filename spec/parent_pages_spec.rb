@@ -1,7 +1,4 @@
-require 'capybara/rspec'
-require './app'
-Capybara.app = Sinatra::Application
-set(:show_exceptions, false)
+require('spec_helper')
 
 describe('adding a parent bank', {:type => :feature}) do
   it('add parent bank') do
