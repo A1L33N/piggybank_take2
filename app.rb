@@ -11,7 +11,6 @@ get ("/") do
   erb(:index)
 end
 
-
 #####Parents
 get('/parents') do
   @title = "Parent Login"
@@ -60,9 +59,6 @@ get('/parent/kids/:id') do
   erb(:parent_kid)
 end
 
-
-
-
 ######Kids
 
 get('/kid') do
@@ -82,7 +78,6 @@ get('/kid') do
   end
 end
 
-
 post('/kids/:id') do
   id = params.fetch('id').to_i
   kid = Kid.find(id)
@@ -92,12 +87,7 @@ post('/kids/:id') do
   date = params.fetch('date')
   transaction = Transaction.create(:transaction_type => transaction_type, :kid_id => kid.id, :amount => amount, :date => date, :description => description)
   redirect back
-
 end
-
-
-
-
 
 ##### Chores
 
@@ -115,7 +105,6 @@ post('/parent/:id/chores') do
   pay = params.fetch('pay').to_f
   chore = Chore.create({:description => description, :pay => pay, :kid_id => nil, :parent_id => id, :available => true, :complete => false})
   redirect back
-
 end
 
 get('/kid_chores/:id') do
@@ -150,11 +139,7 @@ patch('/parent/:id/pay_kid') do
   new_transaction = Transaction.create({:amount => amount, :transaction_type => 'deposit', :description => description, :date => Date.today, :kid_id => kid_id })
   chore.destroy
   redirect back
-
 end
-
-
-
 
 ######Requests
 
@@ -168,8 +153,6 @@ post('/kid/:id/request') do
   request = Request.create({:request_type => request_type, :amount => amount, :description => description, :kid_id => kid_id, :parent_id => parent_id})
   redirect back
 end
-
-
 
 post('/parent/:id/request') do
   kid_id = params.fetch('kid_id').to_i

@@ -42,7 +42,7 @@
         <% kid = Kid.find(kid_id) %>
         <% parent_id = request.parent_id.to_i %>
         <% parent = Parent.find(parent_id) %>
-        <li><%= kid.name %>&nbsp;&nbsp;&nbsp;&nbsp; <%=request.description %>&nbsp;&nbsp;&nbsp;&nbsp; $<%= request.amount %>
+        <li><%= kid.name %>&nbsp;&nbsp;&nbsp;&nbsp;<%= request.request_type %>&nbsp;&nbsp;&nbsp;&nbsp; <%=request.description %>&nbsp;&nbsp;&nbsp;&nbsp; $<%= request.amount %>
           <form id="form_id" action="/parent/<%=parent.id%>/request" method="post">
             <input type="hidden" name="request_id" value="<%=request.id %>">
             <input type="hidden" name="amount" value="<%=request.amount %>">
@@ -59,7 +59,7 @@
     </ul>
 
   <% else %>
-    No pending transactiion requests
+    No pending transaction requests
   <% end %>
 
 
