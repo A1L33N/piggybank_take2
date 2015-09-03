@@ -15,6 +15,7 @@ class Kid < ActiveRecord::Base
     self.transactions.sum(:amount).to_f
   end
 
+
 # not passing for whatever reason
 # private
 #

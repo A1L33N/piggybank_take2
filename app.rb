@@ -33,6 +33,7 @@ get('/parents/:id') do
   @parent = Parent.find(id)
   @kids = @parent.kids()
   @title = @parent.bank_name
+  @requests = @parent.requests
   erb(:parent)
 end
 
@@ -76,6 +77,7 @@ get('/kid') do
     @@message = ""
     @kid = there.first
     @transactions = @kid.transactions
+    @requests = @kid.requests
       erb(:kid_info)
   end
 end
@@ -149,4 +151,19 @@ patch('/parent/:id/pay_kid') do
   chore.destroy
   redirect back
 
+end
+
+
+
+
+######Requests
+
+post('/kid/:id/request') do
+  kid_id = params.fetch('kid_id').to_i
+  parent_id = params.fetch('parent_id').to_i
+  request_type = params.fetch('request_type')
+  amount = params.fetch('amount').to_f
+  description = params.fetch('description')
+  request = Request.create({:request_type => request_type, :amount => amount, :description => description, :kid_id => kid_id, :parent_id => parent_id, :complete => false})
+  redirect back
 end
