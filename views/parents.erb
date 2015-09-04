@@ -1,18 +1,19 @@
-<div class="page_frame">
+<div class="box">
+  <div class="page_frame">
+    <div class="list_frame">
+      <% if @parents.any?() %>
+        <ul>
+          <% @parents.each() do |parent| %>
+            <li><a href="/parents/<%=parent.id%>"><%= parent.bank_name %></a></li>
+          <% end %>
+        </ul>
+      <% else %>
+      <% end %>
+    </div>
+  <div>
+</div>
 
-<div class="list_frame">
-    <% if @parents.any?() %>
-      <ul>
-        <% @parents.each() do |parent| %>
-          <li><a href="/parents/<%=parent.id%>"><%= parent.bank_name %></a></li>
-        <% end %>
-      </ul>
-    <% else %>
-    <% end %>
-<div>
-
-
-  <div class="form_div">
+  <div class="box">
 
       <h2>Add a parent/bank</h2>
       <form id="formid" action="/parents" method="post">

@@ -1,13 +1,16 @@
 <div class="content">
-    <p>My Piggybank</p>
-    <img src="/img/piggy5.png" alt="Piggybank"  />
+
+    <img src="/img/piggy5.png" alt="Piggybank">
     <h4><%= @@message %></h4>
-</div>
-<div id="footer">
+
+<div class="row">
+  <div class="box">
+
       <form id="login_form" action="/kid" method="get">
         <label for="kid_name">Enter Your Name</label>
         <input type="text" name="kid_name" style="width:200px; height:40px" >
         <button type="submit" name="button" style="width:100px; height:30px">Go!</button>
       </form>
-
+    </div>
+</div>
 </div>

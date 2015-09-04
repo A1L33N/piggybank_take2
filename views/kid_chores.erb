@@ -1,45 +1,74 @@
-<h1>Here are <%= @parent.bank_name %> available chores</h1>
-
-<% if @chores.any? %>
-
-  <% @chores.each() do |chore| %>
-    <% if chore.available() %>
-    <li><%=chore.description%>&nbsp;&nbsp;&nbsp;&nbsp;<%=chore.pay%></li>
-
-    <form  action='/parent/<%=@parent.id%>/assign_chores' method="post">
-      <input type="hidden" name="_method" value="patch">
-      <input type="hidden" name="kid_id" value="<%=@kid.id%>">
-      <input type="hidden" name="chore_id" value="<%=chore.id%>">
-      <button type="submit">Sign up for this chore</button>
-
-    </form></li>
-
-
-
+<div class="row">
+  <div class="box">
+    <h2 class="intro-text text-center">Available Chores</h2>
+    <% if @chores.any? %>
+      <table class="table table-striped table-bordered">
+        <thead>
+          <tr>
+             <th>Description</th>
+             <th>Pay</th>
+             <th>Sign Up</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @chores.each() do |chore| %>
+          <% if chore.available() %>
+            <tr>
+             <td><%= chore.description %></td>
+             <td><%= '%.2f' % chore.pay %></td>
+             <td><form  action='/parent/<%=@parent.id%>/assign_chores' method="post">
+                 <input type="hidden" name="_method" value="patch">
+                 <input type="hidden" name="kid_id" value="<%=@kid.id%>">
+                 <input type="hidden" name="chore_id" value="<%=chore.id%>">
+                 <button type="submit" class="btn btn-info">Sign up for this chore!</button>
+                 </form></td>
+            </tr>
+          <%end%>
+        <% end %>
+      </tbody>
+      </table>
+    <% else %>
+      <h3>No available chores</h3>
     <% end %>
-  <%end%>
-<% else %>
-  <h3>No available chores</h3>
-<% end %>
+  </div>
+</div>
 
-
-<h2>Here are the chores you have signed up for, <%=@kid.name %>:</h2>
-
-<% if @kid.chores.any?() %>
-  <ul>
-    <% @kid.chores.each() do |chore| %>
-      <% if chore.complete.==(false) %>
-      <li><%=chore.description%>&nbsp;&nbsp;&nbsp;&nbsp;<%=chore.pay%>
-        <form action="/parent/<%=@parent.id%>/complete_chore" method="post">
-          <input type="hidden" name="_method" value="patch">
-          <input type="hidden" name="chore_id" value="<%=chore.id%>">
-          <button type="submit">Chore completed</button>
-        </form></li>
-      <% else %>
-        <li><%=chore.description%>&nbsp;&nbsp;&nbsp;&nbsp; THIS IS DONE, AWAITING PAYMENT</li>
-      <% end %>
-    <% end %>
-  </ul>
-<% else %>
-  <h4>You haven't signed up for anything you lazy kid!</h4>
-<%end %>
+<div class="row">
+  <div class="box">
+    <h2 class="intro-text text-center">Chores you have signed up for:</h2>
+    <% if @kid.chores.any?() %>
+      <table class="table table-striped table-bordered">
+        <thead>
+          <tr>
+             <th>Description</th>
+             <th>Pay</th>
+             <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @kid.chores.each() do |chore| %>
+          <% if chore.complete.==(false) %>
+            <tr>
+             <td><%= chore.description %></td>
+             <td><%= '%.2f' % chore.pay %></td>
+             <td><form action="/parent/<%=@parent.id%>/complete_chore" method="post">
+               <input type="hidden" name="_method" value="patch">
+               <input type="hidden" name="chore_id" value="<%=chore.id%>">
+               <button type="submit" class="btn btn-info">Chore Completed</button>
+             </form></td>
+            </tr>
+          <%else%>
+          <tr>
+           <td><%= chore.description %></td>
+           <td><%= '%.2f' % chore.pay %></td>
+           <td> Awaiting Payment</td>
+          </tr>
+          <%end%>
+        <% end %>
+      </tbody>
+      </table>
+    <% else %>
+      <h4>You haven't signed up for anything you lazy kid!</h4>
+    <%end %>
+  </div>
+</div>

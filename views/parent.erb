@@ -1,39 +1,98 @@
 
-<div class="page_frame">
-
-  <div class="list_frame">
-
-
+<div class="row">
+  <div class="box">
     <% if @kids.any?() %>
-    <table class="table">
-      <thead>
-      <tr>
-        <th><br>Kid</th>
-        <th><br>Account</th>
-        <th>Beginning<br>Balance</th>
-        <th>Current<br>Balance</th>
-        <th><br>Goal</td>
-      </tr>
-    </thead>
-    <tbody>
-      <% @kids.each() do |kid| %>
-      <tr>
-        <td><a href="/parent/kids/<%=kid.id%>" style="background:lightgray;"><%= kid.name %></a></td>
-        <td style="width:125px;"><%= kid.account_name %></td>
-        <td class="money"><%= '%.2f' % kid.beginning_balance %></td>
-        <td class="money"><%= '%.2f' % kid.balance %></td>
-        <td class="money"><%= '%.2f' % kid.goal %></td>
-       </tr>
-      <% end %>
-    </tbody>
-    </table>
+      <h2 class="intro-text text-center">Kids in <%=@parent.bank_name%></h2>
+      <table class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th><br>Kid</th>
+            <th><br>Account</th>
+            <th>Beginning<br>Balance</th>
+            <th>Current<br>Balance</th>
+            <th><br>Goal</td>
+          </tr>
+        </thead>
+        <tbody>
+          <% @kids.each() do |kid| %>
+          <tr>
+            <td><a href="/parent/kids/<%=kid.id%>" style="background:lightgray;"><%= kid.name %></a></td>
+            <td style="width:125px;"><%= kid.account_name %></td>
+            <td class="money"><%= '%.2f' % kid.beginning_balance %></td>
+            <td class="money"><%= '%.2f' % kid.balance %></td>
+            <td class="money"><%= '%.2f' % kid.goal %></td>
+           </tr>
+          <% end %>
+        </tbody>
+      </table>
     <% else %>
+        <h3>No kids in your bank yet</h3>
     <% end %>
+
+    <div class="col-md-9">
+      <h3>Add a kid to your bank</h3>
+      <form action="/parents/<%= @parent.id %>" method="post">
+
+        <input type="text" name="name" placeholder="Enter a kid name">
+        <input type="text" name="account_name" placeholder="Nickname the account">
+        <input type="text" name="beginning_balance" placeholder="Enter beginning balance" >
+        <input type="text" name="goal" placeholder="Enter a savings goal">
+
+        <button type="submit">Add</button>
+      </form>
+    </div>
+    <div class="col-md-3">
+      <a href="/parent/<%= @parent.id %>/chores">Kid's Chores</a>
+    </div>
   </div>
+</div>
+
+<div class="box">
+  <h2 class="intro-text text-center">Pending Transactions</h2>
+  <% if @requests.any?() %>
+  <table class="table table-striped table-bordered">
+
+    <thead>
+    <tr>
+      <th><br>Kid</th>
+      <th><br>Type</th>
+      <th>Description</th>
+      <th>Amount</th>
+      <th>Approve</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @requests.each() do |request| %>
+    <% kid_id = request.kid_id.to_i %>
+    <% kid = Kid.find(kid_id) %>
+    <% parent_id = request.parent_id.to_i %>
+    <% parent = Parent.find(parent_id) %>
+    <tr>
+      <td style="width:125px;"><%= kid.name %></td>
+      <td class="money"><%= request.request_type %></td>
+      <td class="money"><%= request.description %></td>
+      <td class="money"><%= '%.2f' % request.amount %></td>
+      <td>
+        <form id="form_id" action="/parent/<%=parent.id%>/request" method="post">
+          <input type="hidden" name="request_id" value="<%=request.id %>">
+          <input type="hidden" name="amount" value="<%=request.amount %>">
+          <input type="hidden" name="transaction_type" value="<%=request.request_type %>">
+          <input type="hidden" name="description" value="<%=request.description %>">
+          <input type="hidden" name="kid_id" value="<%=request.kid_id %>">
+          <button type="submit">Approve transaction</button>
+        </form>
+      </td>
+     </tr>
+    <% end %>
+  </tbody>
+  </table>
+  <% else %>
+    <p>No pending transactions</p>
+  <% end %>
+</div>
 
 
-
-<h3>Pending transaction requests</h3>
+<!-- <h3>Pending transaction requests</h3>
 
   <% if @requests.any?() %>
     <ul>
@@ -51,39 +110,11 @@
             <input type="hidden" name="kid_id" value="<%=request.kid_id %>">
             <button type="submit">Approve transaction</button>
           </form>
-
-
-
         </li>
       <% end %>
     </ul>
-
   <% else %>
     No pending transaction requests
-  <% end %>
-
-
-
-
-
-
-
-
+  <% end %> -->
 
   <div class="form_div">
-
-
-  <h3>Add a kid to your bank</h3>
-  <form action="/parents/<%= @parent.id %>" method="post">
-
-    <input type="text" name="name" placeholder="Enter a kid name">
-    <input type="text" name="account_name" placeholder="Nickname the account">
-    <input type="text" name="beginning_balance" placeholder="Enter beginning balance" >
-    <input type="text" name="goal" placeholder="Enter a savings goal">
-
-    <button type="submit">Add</button>
-  </form>
-  </div>
-</div>
-
-<a href="/parent/<%= @parent.id %>/chores">Add chores</a>
