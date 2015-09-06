@@ -16,3 +16,18 @@ img{
   display: flex;
   font-weight: bold;
 }
+
+.bank-list li {
+  text-align: center;
+  list-style-type: none;
+  font-size: 20px;
+}
+
+.bank-list h2 {
+  text-align: center;
+}
+
+.chores-link {
+  font-size: 20px;
+  margin: auto;
+}

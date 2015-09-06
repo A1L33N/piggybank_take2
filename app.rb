@@ -82,14 +82,15 @@ post('/kids/:id') do
   id = params.fetch('id').to_i
   kid = Kid.find(id)
   amount = params.fetch('amount').to_f
-  if transaction_type.=="withdrawal"
-      amount = amount.abs.*(-1)
-  else
-    amount
-  end
+  transaction = params.fetch('transaction_type')
+    if transaction.=="withdrawal"
+        amount = amount.abs.*(-1)
+    else
+      amount
+    end
   description = params.fetch('description')
   date = params.fetch('date')
-  transaction = Transaction.create(:transaction_type => transaction_type, :kid_id => kid.id, :amount => amount, :date => date, :description => description)
+  transaction = Transaction.create(:transaction_type => transaction, :kid_id => kid.id, :amount => amount, :date => date, :description => description)
   redirect back
 end
 
